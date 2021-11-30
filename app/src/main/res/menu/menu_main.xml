@@ -7,4 +7,17 @@
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/hist_temp"
+        android:orderInCategory="100"
+        android:title="@string/hist_temp"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/hist_lum"
+        android:orderInCategory="100"
+        android:title="@string/hist_lum"
+        app:showAsAction="never" />
+
 </menu>
