@@ -11,4 +11,7 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="hist_temp">Historique des températures</string>
     <string name="hist_lum">Historique de la luminosité</string>
+    <string name="long_text">Duis ac purus tristique, fermentum nisl ac, posuere massa. Proin elementum tortor ut urna molestie viverra. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</string>
+    <string name="short_text">Chicken and salad</string>
+    <string name="date1">20/12/2021</string>
 </resources>
