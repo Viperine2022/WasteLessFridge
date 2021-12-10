@@ -16,14 +16,11 @@
 
 
 
-- Branchements possible de la carte à une sortie USB
-- Tests de son
-- Montage avec capteur + buzzer ?
-
-
-
-
-
+- Branchements possible de la carte à une sortie USB.
+- Raffinage de la partie "loop" du code arduino.
+- Implémentation de la conexion wifi à un point d'accés deja connu.
+- Premier test effectué en chargeant un code basique (initialisation simple de la carte). 
+- Premier test de lecture realisé avec les capteurs branchés et beepeur à la carte.
 
 --------
 
