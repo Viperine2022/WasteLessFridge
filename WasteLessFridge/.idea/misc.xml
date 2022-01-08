@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/benoi/Documents/ENSEEIHT/3A/Projet_Arduino/WasteLessFridge/WasteLessFridge/app/src/main/res/drawable/ic_launcher_background.xml" value="0.19010416666666666" />
+        <entry key="..\:/Users/benoi/Documents/ENSEEIHT/3A/Projet_Arduino/WasteLessFridge/WasteLessFridge/app/src/main/res/layout/activity_main.xml" value="0.17395833333333333" />
+        <entry key="..\:/Users/benoi/Documents/ENSEEIHT/3A/Projet_Arduino/WasteLessFridge/WasteLessFridge/app/src/main/res/layout/add_product.xml" value="0.17395833333333333" />
+        <entry key="..\:/Users/benoi/Documents/ENSEEIHT/3A/RecyclerView/WasteLessFridge/app/src/main/res/drawable/ic_pencil_background.xml" value="0.1" />
+        <entry key="..\:/Users/benoi/Documents/ENSEEIHT/3A/RecyclerView/WasteLessFridge/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/benoi/Documents/ENSEEIHT/3A/RecyclerView/WasteLessFridge/app/src/main/res/layout/add_product.xml" value="0.264" />
+        <entry key="..\:/Users/benoi/Documents/ENSEEIHT/3A/RecyclerView/WasteLessFridge/app/src/main/res/layout/product_row.xml" value="0.1" />
+        <entry key="..\:/Users/benoi/Documents/ENSEEIHT/3A/RecyclerView/WasteLessFridge/app/src/main/res/layout/row_product.xml" value="0.264" />
+        <entry key="..\:/Users/benoi/Documents/ENSEEIHT/3A/RecyclerView/WasteLessFridge/app/src/main/res/layout/toolbar.xml" value="0.2" />
+        <entry key="..\:/Users/benoi/Documents/ENSEEIHT/3A/RecyclerView/WasteLessFridge/app/src/main/res/mipmap-anydpi-v26/ic_pencil.xml" value="0.1" />
+        <entry key="..\:/Users/benoi/Documents/ENSEEIHT/3A/RecyclerView/WasteLessFridge/app/src/main/res/mipmap-anydpi-v26/ic_pencil_round.xml" value="0.1" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
