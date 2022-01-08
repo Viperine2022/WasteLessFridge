@@ -79,8 +79,8 @@ public class MainActivity extends AppCompatActivity {
         images = new LinkedList<Integer>();
         pens = new LinkedList<Integer>();
         bins = new LinkedList<Integer>();
-
         storeDataInArrays();
+
 
 
 
@@ -127,6 +127,9 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == LAUNCH_ACTIVITY_ADD && resultCode == RESULT_OK) {
             String name = data.getStringExtra("name");
             String date = data.getStringExtra("date");
+
+            myDB.addProduct2(name.toString().trim(),
+                    date.toString().trim());
 
             adapter.addElement(name, date);
             recyclerView.setAdapter(adapter);

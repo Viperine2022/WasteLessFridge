@@ -63,8 +63,7 @@ public class AddProduct extends AppCompatActivity {
 
                 String nameProductWritten = nameProduct2Add.getText().toString();
                 String dateProductWritten = dateProduct2Add.getText().toString();
-                myDB.addProduct2(nameProduct2Add.getText().toString().trim(),
-                        dateProduct2Add.getText().toString().trim());
+
                 Intent backToMain = new Intent(AddProduct.this, MainActivity.class);
                 backToMain.putExtra("name", nameProductWritten);
                 backToMain.putExtra("date", dateProductWritten);
