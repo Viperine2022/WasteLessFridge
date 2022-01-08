@@ -26,7 +26,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
 
     public Adapter(Activity activity, Context ct, LinkedList<Integer> images, LinkedList<String> dates,
-                   LinkedList<String> names, LinkedList<String> id, LinkedList<Integer> pens, LinkedList<Integer> bins) {
+                   LinkedList<String> names, LinkedList<String> id, LinkedList<Integer> pens, LinkedList<Integer> bins, bddSQL myDB) {
         this.activity = activity;
         this.images = images;
         this.context = ct;
@@ -35,6 +35,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         this.pens = pens;
         this.bins = bins;
         this.row_id = id;
+        this.myDB = myDB;
 
 }
 
@@ -55,12 +56,24 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         viewHolder.name.setText(names.get(i));
         viewHolder.pencil.setImageResource(pens.get(i));
         viewHolder.bin.setImageResource(bins.get(i));
+//        notifyItemRemoved(i);
+//        notifyItemRangeChanged(i, dates.size());
         viewHolder.bin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, ActivityTransition.class);
-                intent.putExtra("id", String.valueOf(row_id.get(i)));
-                activity.startActivityForResult(intent, 1);
+                int position = viewHolder.getAdapterPosition();
+
+                myDB.deleteOneRow(String.valueOf(row_id.get(i)));
+                images.remove(i);
+                dates.remove(i);
+                names.remove(i);
+                pens.remove(i);
+                bins.remove(i);
+                notifyItemRemoved(position);
+                notifyItemRangeChanged(position, dates.size());
+//                Intent intent = new Intent(context, ActivityTransition.class);
+//                intent.putExtra("id", String.valueOf(row_id.get(i)));
+//                activity.startActivityForResult(intent, 1);
             }
         });
     }

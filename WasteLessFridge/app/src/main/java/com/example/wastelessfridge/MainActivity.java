@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
 //        bins.add(R.drawable.bin);
 
         recyclerView = findViewById(R.id.recycler_view);
-        adapter = new Adapter(MainActivity.this,this, images, dates, names, row_id, pens, bins);
+        adapter = new Adapter(MainActivity.this,this, images, dates, names, row_id, pens, bins, myDB);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -130,8 +130,8 @@ public class MainActivity extends AppCompatActivity {
 
             adapter.addElement(name, date);
             recyclerView.setAdapter(adapter);
-            Intent intent=new Intent(this,MainActivity.class);
-            startActivity(intent);
+//            Intent intent=new Intent(this,MainActivity.class);
+//            startActivity(intent);
             }
     }
 
