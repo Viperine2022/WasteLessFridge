@@ -16,12 +16,13 @@ public class AddProduct extends AppCompatActivity {
     EditText nameProduct2Add;
     EditText dateProduct2Add;
     Button addProduct;
+    bddSQL myDB;
 
     @Override
     protected void onCreate(Bundle savecInstanceState) {
         super.onCreate(savecInstanceState);
         setContentView(R.layout.add_product);
-
+        myDB = new bddSQL(AddProduct.this);
         nameProduct2Add = findViewById(R.id.name_product2add);
 
         dateProduct2Add = findViewById(R.id.date_product2add);
@@ -58,11 +59,16 @@ public class AddProduct extends AppCompatActivity {
         addProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 String nameProductWritten = nameProduct2Add.getText().toString();
                 String dateProductWritten = dateProduct2Add.getText().toString();
+                myDB.addProduct2(nameProduct2Add.getText().toString().trim(),
+                        dateProduct2Add.getText().toString().trim());
                 Intent backToMain = new Intent(AddProduct.this, MainActivity.class);
                 backToMain.putExtra("name", nameProductWritten);
                 backToMain.putExtra("date", dateProductWritten);
+
                 setResult(Activity.RESULT_OK, backToMain);
                 finish();
             }
