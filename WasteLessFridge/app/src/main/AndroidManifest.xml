@@ -10,6 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WasteLessFridge">
         <activity
+            android:name=".hiveMQ"
+            android:exported="false" />
+        <activity
+            android:name=".HistoriqueTemperature"
+            android:exported="false" />
+        <activity
+            android:name=".HistoriqueLuminosite"
+            android:exported="false" />
+        <activity
             android:name=".ActivityTransition"
             android:exported="false" />
         <activity
@@ -29,4 +38,6 @@
         </activity>
     </application>
 
+
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

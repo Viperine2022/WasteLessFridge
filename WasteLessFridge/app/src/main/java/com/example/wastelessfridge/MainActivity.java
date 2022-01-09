@@ -8,8 +8,11 @@ import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -27,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
     TextView tvCurrentDate;
     // Le bouton '+'
     ImageButton add_toolbar;
+    // Le bouton pour ouvrir le menu"
+    ImageButton open_menu;
     // Code de retour de l'intent
     public static final int LAUNCH_ACTIVITY_ADD = 2;
 
@@ -41,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     Adapter adapter;
 
     /* Listes nécessaires pour le RecyclerView */
-    private LinkedList<String> dates, names,row_id;
+    private LinkedList<String> dates, names, row_id;
     private LinkedList<Integer> images, pens, bins;
 
     /* Données du CardView (ligne de chaque produit) cf row_product */
@@ -50,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
     TextView name_product;
     ImageButton pencil;
     ImageButton bin;
-
+    PopupMenu popup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +78,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        myDB.deleteAllData();
+        // On définit le listener du bouton openMenu
+        open_menu = findViewById(R.id.dots_open_menu);
+        open_menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popup = new PopupMenu(MainActivity.this, v);
+                MenuInflater inflater = popup.getMenuInflater();
+                inflater.inflate(R.menu.menu, popup.getMenu());
+                popup.show();
+            }
+        });
+
         dates = new LinkedList<String>();
         names = new LinkedList<String>();
         row_id = new LinkedList<String>();
@@ -82,26 +98,8 @@ public class MainActivity extends AppCompatActivity {
         bins = new LinkedList<Integer>();
         storeDataInArrays();
 
-//
-//        images.add(R.drawable.food);
-//        images.add(R.drawable.food);
-//
-//        String[] dates_array = getResources().getStringArray(R.array.product_dates);
-//        String[] names_array = getResources().getStringArray(R.array.product_names);
-//
-//        for (int i=0 ; i<dates_array.length ; i++) {
-//            dates.add(dates_array[i]);
-//            names.add(names_array[i]);
-//        }
-//
-//        pens.add(R.drawable.pencil);
-//        pens.add(R.drawable.pencil);
-//
-//        bins.add(R.drawable.bin);
-//        bins.add(R.drawable.bin);
-
         recyclerView = findViewById(R.id.recycler_view);
-        adapter = new Adapter(MainActivity.this,this, images, dates, names, row_id, pens, bins, myDB);
+        adapter = new Adapter(MainActivity.this, this, images, dates, names, row_id, pens, bins, myDB);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -119,19 +117,12 @@ public class MainActivity extends AppCompatActivity {
             storeDataInArrays();
 
             recyclerView.setAdapter(adapter);
-
-//            Intent actualiser =new Intent(this,MainActivity.class);
-//            //on lance l'intent, cela a pour effet de stoper l'activité courante et lancer une autre activite ici SecondActivite
-//            startActivity(actualiser);
-
-            }
+        }
         if (requestCode == Adapter.LAUNCH_MODIFY_PRODUCT && resultCode == RESULT_OK) {
             String nameModified = data.getStringExtra("name");
             String dateModified = data.getStringExtra("date");
             int id = Integer.parseInt(data.getStringExtra("id"));
             int position = Integer.parseInt(data.getStringExtra("position"));
-
-            Log.d("****** name modified", nameModified);
 
             myDB.updateData(String.valueOf(id), nameModified, dateModified);
 
@@ -142,12 +133,12 @@ public class MainActivity extends AppCompatActivity {
 
     void storeDataInArrays() {
         Cursor cursor = myDB.readAllData();
-            pens.clear();
-            bins.clear();;
-            images.clear();
-            row_id.clear();
-            names.clear();
-            dates.clear();
+        pens.clear();
+        bins.clear();
+        images.clear();
+        row_id.clear();
+        names.clear();
+        dates.clear();
         while (cursor.moveToNext()) {
             pens.add(R.drawable.pencil);
             bins.add(R.drawable.bin);
@@ -156,5 +147,12 @@ public class MainActivity extends AppCompatActivity {
             names.add(cursor.getString(1));
             dates.add(cursor.getString(2));
         }
+    }
+    public void historiqueTemp(MenuItem item) {
+        startActivity(new Intent(this, HistoriqueTemperature.class));
+    }
+
+    public void historiqueLum(MenuItem item) {
+        startActivity(new Intent(this, HistoriqueLuminosite.class));
     }
 }

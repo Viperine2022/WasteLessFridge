@@ -9,6 +9,10 @@
     <string name="add_product">Add a product</string>
     <string name="modify_product">Modify a product</string>
 
+    <string name="action_settings">Settings</string>
+    <string name="hist_temp">Historique des températures</string>
+    <string name="hist_lum">Historique de la luminosité</string>
+
     <!-- Au lancement de l'appli, produits ajoutés par défaut -->
     <string-array name="product_dates">
         <item>20/01/2022</item>
