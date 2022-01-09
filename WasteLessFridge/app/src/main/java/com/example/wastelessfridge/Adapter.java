@@ -23,7 +23,10 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     LinkedList<String> dates, names, row_id;
     LinkedList<Integer> pens, bins;
     bddSQL myDB;
-
+    public static final int LAUNCH_MODIFY_PRODUCT = 10;
+    public static final String CURRENT_NAME = "com.example.wastelessfridge.CurrentName";
+    public static final String CURRENT_DATE = "com.example.wastelessfridge.CurrentDate";
+    public static final String POSITION = "com.example.wastelessfridge.Position";
 
     public Adapter(Activity activity, Context ct, LinkedList<Integer> images, LinkedList<String> dates,
                    LinkedList<String> names, LinkedList<String> id, LinkedList<Integer> pens, LinkedList<Integer> bins, bddSQL myDB) {
@@ -54,16 +57,29 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         viewHolder.img.setImageResource(images.get(i));
         viewHolder.date.setText(dates.get(i));
         viewHolder.name.setText(names.get(i));
+
         viewHolder.pencil.setImageResource(pens.get(i));
+        viewHolder.pencil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent move2modify = new Intent(context, ModifyProduct.class);
+                String nameToDisplay = names.get(i);
+                String dateToDisplay = dates.get(i);
+                move2modify.putExtra(CURRENT_NAME, nameToDisplay);
+                move2modify.putExtra(CURRENT_DATE, dateToDisplay);
+                move2modify.putExtra(POSITION, String.valueOf(i));
+                activity.startActivityForResult(move2modify, LAUNCH_MODIFY_PRODUCT);
+                activity.setResult(Activity.RESULT_OK, move2modify);
+            }
+        });
+
         viewHolder.bin.setImageResource(bins.get(i));
-//        notifyItemRemoved(i);
-//        notifyItemRangeChanged(i, dates.size());
         viewHolder.bin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int position = viewHolder.getAdapterPosition();
 
-                myDB.deleteOneRow(String.valueOf(row_id.get(i)));
+                myDB.deleteOneRow(String.valueOf(row_id.get(position)));
                 images.remove(i);
                 dates.remove(i);
                 names.remove(i);
@@ -71,9 +87,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
                 bins.remove(i);
                 notifyItemRemoved(position);
                 notifyItemRangeChanged(position, dates.size());
-//                Intent intent = new Intent(context, ActivityTransition.class);
-//                intent.putExtra("id", String.valueOf(row_id.get(i)));
-//                activity.startActivityForResult(intent, 1);
             }
         });
     }
@@ -90,6 +103,12 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         dates.add(date);
         pens.add(R.drawable.pencil);
         bins.add(R.drawable.bin);
+    }
+
+    /** Modifier un élement du recyclerView */
+    public void modifyElement(String name, String date, int position) {
+        names.set(position,name);
+        dates.set(position, date);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

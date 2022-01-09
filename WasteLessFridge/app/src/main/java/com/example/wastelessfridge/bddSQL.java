@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.widget.Toast;
+
 import org.jetbrains.annotations.Nullable;
 
 
@@ -41,71 +42,65 @@ class bddSQL extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
     }
+
     // Permet l'ajout de nouveaux éléments à la base de données
-    public void addProduct2(String name,String date ){
+    public void addProduct2(String name, String date) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
         cv.put(COLUMN_NAME, name);
         cv.put(COLUMN_DATE, date);
 
+        long result = db.insert(TABLE_NAME, null, cv);
 
-        long result = db.insert(TABLE_NAME,null, cv);
-
-        if(result == -1){
+        if (result == -1) {
             Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
-        }else {
+        } else {
             Toast.makeText(context, "Added Successfully!", Toast.LENGTH_SHORT).show();
         }
-
     }
 
-
     // Permet de créer le cursor afin de parcourir la base de données
-    Cursor readAllData(){
+    Cursor readAllData() {
         String query = "SELECT * FROM " + TABLE_NAME;
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = null;
-        if(db != null){
+        if (db != null) {
             cursor = db.rawQuery(query, null);
         }
         return cursor;
     }
 
-    //Supprimer un élément avec son ID
-    void deleteOneRow(String row_id){
+    // Supprimer un élément avec son ID
+    void deleteOneRow(String row_id) {
         SQLiteDatabase db = this.getWritableDatabase();
         long result = db.delete(TABLE_NAME, "ID=?", new String[]{row_id});
-        if(result == -1){
+        if (result == -1) {
             Toast.makeText(context, "Failed to Delete.", Toast.LENGTH_SHORT).show();
-        }else{
+        } else {
             Toast.makeText(context, "Suppression effectuée avec succés!", Toast.LENGTH_SHORT).show();
         }
     }
-    // Modfier une ligne
-    void updateData(String row_id, String name, String date){
+
+    // Modifier une ligne
+    void updateData(String row_id, String name, String date) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_NAME, name);
         cv.put(COLUMN_DATE, date);
-
-
-        long result = db.update(TABLE_NAME, cv, "_id=?", new String[]{row_id});
-        if(result == -1){
-            Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show();
-        }else {
+        long result = db.update(TABLE_NAME, cv, "ID=?", new String[]{row_id});
+        if (result == -1) {
+            Toast.makeText(context, "Failed to update", Toast.LENGTH_SHORT).show();
+        } else {
             Toast.makeText(context, "Modification effectuée avec succés!", Toast.LENGTH_SHORT).show();
         }
 
     }
 
-
     // Permet d'effacer le contenu de la table (non utilisé explicitement dans ce projet mais utile en phase de développement)
-    void deleteAllData(){
+    void deleteAllData() {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM " + TABLE_NAME);
-
     }
-
 }

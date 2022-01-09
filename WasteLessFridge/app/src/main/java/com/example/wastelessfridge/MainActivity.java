@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -27,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     // Le bouton '+'
     ImageButton add_toolbar;
     // Code de retour de l'intent
-    public final int LAUNCH_ACTIVITY_ADD = 2;
+    public static final int LAUNCH_ACTIVITY_ADD = 2;
 
     ///////////////////
     // Recycler View //
@@ -81,9 +82,6 @@ public class MainActivity extends AppCompatActivity {
         bins = new LinkedList<Integer>();
         storeDataInArrays();
 
-
-
-
 //
 //        images.add(R.drawable.food);
 //        images.add(R.drawable.food);
@@ -118,7 +116,6 @@ public class MainActivity extends AppCompatActivity {
         }
         else{
             System.out.println("il reco pas le btn");
-
         }
     }
 
@@ -133,28 +130,31 @@ public class MainActivity extends AppCompatActivity {
 
             adapter.addElement(name, date);
             recyclerView.setAdapter(adapter);
-//            Intent intent=new Intent(this,MainActivity.class);
-//            startActivity(intent);
             }
+        if (requestCode == Adapter.LAUNCH_MODIFY_PRODUCT && resultCode == RESULT_OK) {
+            String nameModified = data.getStringExtra("name");
+            String dateModified = data.getStringExtra("date");
+            int position = Integer.parseInt(data.getStringExtra("position"));
+
+            Log.d("****** name modified", nameModified);
+
+            myDB.updateData(String.valueOf(position), nameModified, dateModified);
+
+            adapter.modifyElement(nameModified, dateModified, position);
+            recyclerView.setAdapter(adapter);
+        }
     }
 
     void storeDataInArrays() {
         Cursor cursor = myDB.readAllData();
 
         while (cursor.moveToNext()) {
-
             pens.add(R.drawable.pencil);
             bins.add(R.drawable.bin);
             images.add(R.drawable.food);
             row_id.add(cursor.getString(0));
             names.add(cursor.getString(1));
             dates.add(cursor.getString(2));
-
-
-
         }
-
     }
-
-
 }

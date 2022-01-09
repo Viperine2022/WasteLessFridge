@@ -13,6 +13,9 @@
             android:name=".ActivityTransition"
             android:exported="false" />
         <activity
+            android:name=".ModifyProduct"
+            android:exported="false" />
+        <activity
             android:name=".AddProduct"
             android:exported="false" />
         <activity
