@@ -79,8 +79,14 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             @Override
             public void onClick(View v) {
                 int position = viewHolder.getAdapterPosition();
+                System.out.println(row_id.get(i));
+                myDB.deleteOneRow(String.valueOf(row_id.get(i)));
+                images.size();
+                for (int j = 1;j<images.size();j++){
+                    myDB.updateId(Integer.toString(Integer.parseInt(row_id.get(i))+j));
 
-                myDB.deleteOneRow(String.valueOf(row_id.get(position)));
+                }
+
                 images.remove(i);
                 dates.remove(i);
                 names.remove(i);

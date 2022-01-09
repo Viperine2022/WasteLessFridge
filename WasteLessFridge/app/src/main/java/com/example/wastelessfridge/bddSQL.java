@@ -97,6 +97,20 @@ class bddSQL extends SQLiteOpenHelper {
         }
 
     }
+    void updateId(String row_id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        String newID = Integer.toString(Integer.parseInt(row_id)-1);
+        cv.put(COLUMN_ID, newID);
+
+        long result = db.update(TABLE_NAME, cv, "ID=?", new String[]{row_id});
+        if (result == -1) {
+            Toast.makeText(context, "Failed to update", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(context, "Modification effectuée avec succés!", Toast.LENGTH_SHORT).show();
+        }
+
+    }
 
     // Permet d'effacer le contenu de la table (non utilisé explicitement dans ce projet mais utile en phase de développement)
     void deleteAllData() {
