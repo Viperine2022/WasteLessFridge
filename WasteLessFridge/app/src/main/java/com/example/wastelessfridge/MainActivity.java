@@ -105,18 +105,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        if (bin != null) {
-            bin.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    System.out.println("nameProduct2Add");
-                    myDB.deleteOneRow("0");
-                }
-            });
-        }
-        else{
-            System.out.println("il reco pas le btn");
-        }
+
     }
 
     @Override
@@ -127,18 +116,24 @@ public class MainActivity extends AppCompatActivity {
 
             myDB.addProduct2(name.toString().trim(),
                     date.toString().trim());
+            storeDataInArrays();
 
-            adapter.addElement(name, date);
             recyclerView.setAdapter(adapter);
+
+//            Intent actualiser =new Intent(this,MainActivity.class);
+//            //on lance l'intent, cela a pour effet de stoper l'activité courante et lancer une autre activite ici SecondActivite
+//            startActivity(actualiser);
+
             }
         if (requestCode == Adapter.LAUNCH_MODIFY_PRODUCT && resultCode == RESULT_OK) {
             String nameModified = data.getStringExtra("name");
             String dateModified = data.getStringExtra("date");
+            int id = Integer.parseInt(data.getStringExtra("id"));
             int position = Integer.parseInt(data.getStringExtra("position"));
 
             Log.d("****** name modified", nameModified);
 
-            myDB.updateData(String.valueOf(position), nameModified, dateModified);
+            myDB.updateData(String.valueOf(id), nameModified, dateModified);
 
             adapter.modifyElement(nameModified, dateModified, position);
             recyclerView.setAdapter(adapter);
@@ -147,7 +142,12 @@ public class MainActivity extends AppCompatActivity {
 
     void storeDataInArrays() {
         Cursor cursor = myDB.readAllData();
-
+            pens.clear();
+            bins.clear();;
+            images.clear();
+            row_id.clear();
+            names.clear();
+            dates.clear();
         while (cursor.moveToNext()) {
             pens.add(R.drawable.pencil);
             bins.add(R.drawable.bin);

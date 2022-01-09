@@ -20,7 +20,7 @@ public class ModifyProduct extends AppCompatActivity {
     // Le texte de date à afficher directement sur l'EditText
     String dateToDisplay;
     // La position du produit à modifier
-    int position;
+    int position, id;
     Button modifyProduct;
     bddSQL myDB;
 
@@ -41,7 +41,9 @@ public class ModifyProduct extends AppCompatActivity {
 
         // Extraction de la position (pour la donner plus tard à MainActivity)
         position = Integer.parseInt(getIntent().getStringExtra(Adapter.POSITION));
+        id = Integer.parseInt(getIntent().getStringExtra(Adapter.ID));
 
+        System.out.println("*******" + id);
         dateProduct2Modify.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -79,6 +81,7 @@ public class ModifyProduct extends AppCompatActivity {
                 backToMain.putExtra("name", nameProductWritten);
                 backToMain.putExtra("date", dateProductWritten);
                 backToMain.putExtra("position", String.valueOf(position));
+                backToMain.putExtra("id", String.valueOf(id));
                 setResult(Activity.RESULT_OK, backToMain);
                 finish();
             }

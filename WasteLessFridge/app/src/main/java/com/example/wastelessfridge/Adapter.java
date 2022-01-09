@@ -27,7 +27,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     public static final String CURRENT_NAME = "com.example.wastelessfridge.CurrentName";
     public static final String CURRENT_DATE = "com.example.wastelessfridge.CurrentDate";
     public static final String POSITION = "com.example.wastelessfridge.Position";
-
+    public static final String ID = "com.example.wastelessfridge.Id";
     public Adapter(Activity activity, Context ct, LinkedList<Integer> images, LinkedList<String> dates,
                    LinkedList<String> names, LinkedList<String> id, LinkedList<Integer> pens, LinkedList<Integer> bins, bddSQL myDB) {
         this.activity = activity;
@@ -68,6 +68,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
                 move2modify.putExtra(CURRENT_NAME, nameToDisplay);
                 move2modify.putExtra(CURRENT_DATE, dateToDisplay);
                 move2modify.putExtra(POSITION, String.valueOf(i));
+                move2modify.putExtra(ID, String.valueOf(row_id.get(i)));
                 activity.startActivityForResult(move2modify, LAUNCH_MODIFY_PRODUCT);
                 activity.setResult(Activity.RESULT_OK, move2modify);
             }
